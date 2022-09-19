@@ -1,11 +1,12 @@
-// import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
+@Injectable({
+  providedIn: 'root'
+})
 export class RecipeService {
 
   recipeSelected = new EventEmitter<Recipe>();
@@ -31,9 +32,17 @@ export class RecipeService {
       )
   ];
 
+  
+  constructor(
+    private _shoppingListService: ShoppingListService
+  ) { }
+
   getRecipes() {
     return this.recipes.slice(); // only get a copy of the recipes, cannot access the recipes from outside
   }
 
-  constructor() { }
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this._shoppingListService.addIngredients(ingredients);
+  }
+
 }
