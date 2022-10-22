@@ -37,6 +37,10 @@ export class RecipeService {
     private _shoppingListService: ShoppingListService
   ) { }
 
+  getRecipeById(index: number) {
+    return this.recipes[index];
+  }
+
   getRecipes() {
     return this.recipes.slice(); // only get a copy of the recipes, cannot access the recipes from outside
   }
